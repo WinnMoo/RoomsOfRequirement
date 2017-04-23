@@ -1,3 +1,23 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  color: white;
+  text-align: center;
+}
+
+.jumbotron {
+  background-color: #2c3e50;
+}
+
+#title_header {
+  font-size: 35px;
+}
+
+#sub_header {
+  font-style: italic;
+}
