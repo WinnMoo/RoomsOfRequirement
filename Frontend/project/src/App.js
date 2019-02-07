@@ -10,15 +10,13 @@ class App extends Component {
     }
 
     checkBuildingExists(searchedRoom){
-        var rooms = ["VEC", 'ECS', "EN2", "EN3"]
-        var i;
-        for(i = 0; i < rooms.length; i++) {
+        const rooms = ["VEC", 'ECS', "EN2", "EN3"]
+        for(let i = 0; i < rooms.length; i++) {
             if(searchedRoom === rooms[i]){
                 return true;
-             } else {
-                return false;
             }
         }
+        return false;
     }
 
     validInput(searchedRoom){
@@ -38,10 +36,10 @@ class App extends Component {
 
     handleSubmit(){
         if(document.getElementById("searchedRoom") != null){
-            var searchedRoom = document.getElementById("searchedRoom").value;
+            const searchedRoom = document.getElementById("searchedRoom").value;
             console.log(document.getElementById("searchedRoom").value);
             searchedRoom.trim();
-            document.getElementById("searchedRoom").innerHTML = "You wrote: " + searchedRoom;
+            document.getElementById("searchedRoom").innerHTML = "You wrote: ${searchedRoom}";
             /*
             if(searchedRoom.includes('!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '.', '?')){
                 this.invalidInput();
