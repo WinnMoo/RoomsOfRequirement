@@ -9,20 +9,20 @@ class App extends Component {
         console.log("Room searched for was invalid, please search again");
     }
 
-    checkBuildingExists(searchedRoom) {
-        const rooms = ["VEC", 'ECS', "EN2", "EN3"];
-        for(let i = 0; i < rooms.length; i++) {
+    checkBuildingExists(searchedRoom){
+        var rooms = ["VEC", 'ECS', "EN2", "EN3"]
+        var i;
+        for(i = 0; i < rooms.length; i++) {
             if(searchedRoom === rooms[i]){
                 return true;
+             } else {
+                return false;
             }
         }
-        return false;
     }
 
     validInput(searchedRoom){
         if(this.checkBuildingExists(searchedRoom)){
-            // Expected an assignment or function call and instead saw an expression
-            /*
             <table>
                 <tr>
                     <th>Room Number</th>
@@ -30,17 +30,16 @@ class App extends Component {
                     <th>Remaining Time Until Occupied</th>
                 </tr>
             </table>
-            */
         }
 
     }
 
     handleSubmit(){
         if(document.getElementById("searchedRoom") != null){
-            const searchedRoom = document.getElementById("searchedRoom").value;
+            var searchedRoom = document.getElementById("searchedRoom").value;
             console.log(document.getElementById("searchedRoom").value);
             searchedRoom.trim();
-            document.getElementById("searchedRoom").innerHTML = `You wrote: ${searchedRoom}`;
+            document.getElementById("searchedRoom").innerHTML = "You wrote: " + searchedRoom;
             /*
             if(searchedRoom.includes('!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '.', '?')){
                 this.invalidInput();
@@ -50,8 +49,6 @@ class App extends Component {
             */
         } else {
             console.log("nothing is there");
-            // Expected an assignment or function call and instead saw an expression
-            /*
             <table>
                 <tr>
                     <th>Room Number</th>
@@ -59,17 +56,15 @@ class App extends Component {
                     <th>Remaining Time Until Occupied</th>
                 </tr>
             </table>
-            */
         }
     }
 
 
     render() {
         return (
-            // eslint-disable-next-line react/jsx-indent
             <div className="App">
                 <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
+                    <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">Room of Requirement</h1>
                     <form className="input">
                         <input type="text" name="search" placeholder="Building Name.." autoComplete="off" id="searchedRoom" onChange={this.handleSubmit()}/>
