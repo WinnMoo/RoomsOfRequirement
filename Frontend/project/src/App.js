@@ -23,6 +23,7 @@ class App extends Component {
 
     validInput(searchedRoom){
         if(this.checkBuildingExists(searchedRoom)){
+          /*
             <table>
                 <tr>
                     <th>Room Number</th>
@@ -30,6 +31,7 @@ class App extends Component {
                     <th>Remaining Time Until Occupied</th>
                 </tr>
             </table>
+            */
         }
 
     }
@@ -49,6 +51,7 @@ class App extends Component {
             */
         } else {
             console.log("nothing is there");
+            /*
             <table>
                 <tr>
                     <th>Room Number</th>
@@ -56,6 +59,7 @@ class App extends Component {
                     <th>Remaining Time Until Occupied</th>
                 </tr>
             </table>
+            */
         }
     }
 
