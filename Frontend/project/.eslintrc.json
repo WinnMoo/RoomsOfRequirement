@@ -1,0 +1,24 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-console": "warn",
+        "no-var": "error",
+        "no-trailing-spaces": "error",
+        "prefer-template": "error"
+    },
+    "globals": {
+        "document": true,
+        "console": true,
+        "window": true,
+        "process": true,
+        "navigator": true,
+        "fetch": true,
+        "URL": true
+    }
+}
