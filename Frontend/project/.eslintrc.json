@@ -10,7 +10,8 @@
         "no-console": "warn",
         "no-var": "error",
         "no-trailing-spaces": "error",
-        "prefer-template": "error"
+        "prefer-template": "error",
+        "no-template-curly-in-string": "error"
     },
     "globals": {
         "document": true,

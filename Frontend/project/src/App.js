@@ -39,7 +39,7 @@ class App extends Component {
             const searchedRoom = document.getElementById("searchedRoom").value;
             console.log(document.getElementById("searchedRoom").value);
             searchedRoom.trim();
-            document.getElementById("searchedRoom").innerHTML = "You wrote: ${searchedRoom}";
+            document.getElementById("searchedRoom").innerHTML = `You wrote: ${searchedRoom}`;
             /*
             if(searchedRoom.includes('!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '.', '?')){
                 this.invalidInput();
