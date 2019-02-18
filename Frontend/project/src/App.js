@@ -10,19 +10,18 @@ class App extends Component {
     }
 
     checkBuildingExists(searchedRoom){
-        var rooms = ["VEC", 'ECS', "EN2", "EN3"]
-        var i;
-        for(i = 0; i < rooms.length; i++) {
+        const rooms = ["VEC", 'ECS', "EN2", "EN3"]
+        for(let i = 0; i < rooms.length; i++) {
             if(searchedRoom === rooms[i]){
                 return true;
-             } else {
-                return false;
             }
         }
+        return false;
     }
 
     validInput(searchedRoom){
         if(this.checkBuildingExists(searchedRoom)){
+          /*
             <table>
                 <tr>
                     <th>Room Number</th>
@@ -30,16 +29,17 @@ class App extends Component {
                     <th>Remaining Time Until Occupied</th>
                 </tr>
             </table>
+            */
         }
 
     }
 
     handleSubmit(){
         if(document.getElementById("searchedRoom") != null){
-            var searchedRoom = document.getElementById("searchedRoom").value;
+            const searchedRoom = document.getElementById("searchedRoom").value;
             console.log(document.getElementById("searchedRoom").value);
             searchedRoom.trim();
-            document.getElementById("searchedRoom").innerHTML = "You wrote: " + searchedRoom;
+            document.getElementById("searchedRoom").innerHTML = `You wrote: ${searchedRoom}`;
             /*
             if(searchedRoom.includes('!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '.', '?')){
                 this.invalidInput();
@@ -49,6 +49,7 @@ class App extends Component {
             */
         } else {
             console.log("nothing is there");
+            /*
             <table>
                 <tr>
                     <th>Room Number</th>
@@ -56,6 +57,7 @@ class App extends Component {
                     <th>Remaining Time Until Occupied</th>
                 </tr>
             </table>
+            */
         }
     }
 
