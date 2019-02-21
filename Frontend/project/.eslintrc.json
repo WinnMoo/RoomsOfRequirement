@@ -1,17 +1,19 @@
 {
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+        "airbnb"
     ],
+    "plugins": [
+        "react"
+    ],
+    "parser": "babel-eslint",
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     },
     "rules": {
-        "no-console": "warn",
-        "no-var": "error",
-        "no-trailing-spaces": "error",
-        "prefer-template": "error",
-        "no-template-curly-in-string": "error"
+        "no-console": "warn"
     },
     "globals": {
         "document": true,
