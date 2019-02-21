@@ -8,6 +8,7 @@ export default class SearchBar extends Component {
   }
 
   onChange = (event) => {
+    // Maybe move updateClassrooms() here?
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -16,7 +17,7 @@ export default class SearchBar extends Component {
   onSubmit = (event) => {
     const { updateClassrooms } = this.props;
     const { building } = this.state;
-    event.preventDefault();
+    event.preventDefault();  // Prevents the page from reloading
     updateClassrooms(building);
     this.setState({
       building: '',
