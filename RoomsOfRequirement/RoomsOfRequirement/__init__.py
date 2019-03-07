@@ -145,6 +145,19 @@ def webcrawler(conn):
         insert_classroom_data(conn, home_url + html_extender + '.html', constant)
         constant = constant + 1
 
+def findEmptyClassroom(conn, current_weekday, current_hour):
+    cur = conn.cursor()
+
+    sql = '''
+    SELECT DISTINCT classroom from classroom
+    EXCEPT
+    SELECT classroom FROM classroom NATURAL JOIN weekday
+    WHERE weekday = ? AND (start_time < ? and end_time > ?)
+    '''
+    cur.execute(sql, (current_weekday, current_hour, current_hour))
+
+    return cur.fetchall()
+
 def main():
     database = 'db.sqlite3'
 
@@ -171,7 +184,9 @@ def main():
 
     current_hour = datetime.today().strftime("%H:%M")
 
+    print(current_weekday)
 
+    print(current_hour)
     if conn is not None:
         # create table
         create_table(conn, create_classroom_table, 'classroom');
@@ -179,6 +194,9 @@ def main():
 
         webcrawler(conn);
 
+        emptyClassroom = findEmptyClassroom(conn, current_weekday, current_hour)
+
+        print(emptyClassroom)
         conn.commit()
 
         conn.close()
