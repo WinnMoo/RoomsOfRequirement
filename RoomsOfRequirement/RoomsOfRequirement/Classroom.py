@@ -1,21 +1,20 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Created on Tue Feb 12 16:56:23 2019
 
 @author: winn
 """
-from datetime import datetime
 
 
 class Classroom:
+    """Classroom that contains time slot(s), days of week, and room number"""
+
     DOW = {'M': 'Monday', 'Tu': 'Tuesday',
            'W': 'Wednesday', 'Th': 'Thursday', 'F': 'Friday'}
 
     def __init__(self, day, time, classroomNumber):
-        self.formatClassRoomNumber(classroomNumber)
-        self.formatDays(day)
-        self.formatTimes(time)
+        self.format_classroom_number(classroomNumber)
+        self.format_days(day)
+        self.format_times(time)
 
     def __str__(self):
         return 'Days: {0:23} Time: {1:15} Building: {2} Room #: {3}'.format(
@@ -24,29 +23,34 @@ class Classroom:
             self.building,
             self.room)
 
-    def formatClassRoomNumber(self, classroomNumber):
-        tokens = classroomNumber.split('-')
+    def format_classroom_number(self, classroom_number):
+        """Initializes building and room number from title"""
+
+        tokens = classroom_number.split('-')
         self.building = tokens[0]
         self.room = tokens[1]
 
-    # If you guys want, you can change this to hold just the initials instead 
+    # If you guys want, you can change this to hold just the initials instead
     # of the full names of the dates
-    def formatDays(self, day):
-        self.days = []
-        for c in day:
-            if c == 'M' or c == 'W' or c == 'F':
-                self.days.append(self.DOW[c])
-                # self.days.append(c)
-            elif c == 'h' or c == 'u':
-                self.days.append(self.DOW['T' + c])
-                # self.days.append('T' + c)
+    def format_days(self, day):
+        """Initializes days of the week from small string"""
 
-    def formatTimes(self, time):
+        self.days = []
+        for char in day:
+            if char in ('M', 'W', 'F'):
+                self.days.append(self.DOW[char])
+                # self.days.append(char)
+            elif char in ('h', 'u'):
+                self.days.append(self.DOW['T' + char])
+                # self.days.append('T' + char)
+
+    def format_times(self, time):
+        """Initializes start and end time from minified string"""
+
         times = time.split('-')
         self.start = times[0]
         self.end = times[1]
 
-        # TODO convert from 12hr format to 24hr format
         if ':' not in self.start:
             self.start += ':00'
         if ':' not in self.end:
@@ -58,5 +62,3 @@ class Classroom:
             self.start += 'AM'
         else:
             self.start += 'PM'
-        
-        # a = datetime.strptime(self.start, "%H:%M")

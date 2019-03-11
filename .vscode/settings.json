@@ -1,6 +1,9 @@
 {
-    "python.linting.enabled": true,
-    "code-runner.executorMap": {
-        "python": "python3 -u"
-    }
+  "python.linting.enabled": true,
+  "code-runner.executorMap": {
+    "python": "python3 -u"
+  },
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": ["--load-plugins=pylint_django"],
+  "python.pythonPath": "C:\\Users\\Christopher\\.virtualenvs\\RoomsOfRequirement-9WRTF47z\\Scripts\\python.exe"
 }

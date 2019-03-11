@@ -1,0 +1,3 @@
+const GET_CLASSROOMS = 'GET_CLASSROOMS';
+
+export default GET_CLASSROOMS;

@@ -1,0 +1,23 @@
+{
+  "extends": ["airbnb"],
+  "plugins": ["react"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "no-console": "warn"
+  },
+  "globals": {
+    "document": true,
+    "console": true,
+    "window": true,
+    "process": true,
+    "navigator": true,
+    "fetch": true,
+    "URL": true
+  }
+}
