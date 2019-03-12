@@ -28,7 +28,6 @@ def create_table(conn, create_table_sql, table_name):
 
     try:
         c = conn.cursor()
-        c.execute('''DROP TABLE IF EXISTS ''' + table_name + ';')
         c.execute(create_table_sql)
     except Error as e:
         print(e)
@@ -158,17 +157,22 @@ def findEmptyClassroom(conn, current_weekday, current_hour):
 
     return cur.fetchall()
 
+def selectData(conn, sql):
+    cur = conn.cursor()
+    cur.execute(sql)
+    return cur.fetchall()
+
 def main():
     database = 'db.sqlite3'
 
-    create_classroom_table = '''CREATE TABLE CLASSROOM (
+    create_classroom_table = '''CREATE TABLE IF NOT EXISTS CLASSROOM (
                                 class_id integer PRIMARY KEY,
                                 classroom text,
                                 start_time text,
                                 end_time text
     );'''
 
-    create_weekday_table = '''CREATE TABLE WEEKDAY (
+    create_weekday_table = '''CREATE TABLE IF NOT EXISTS WEEKDAY (
                               class_id integer,
                               weekday text,
                               PRIMARY KEY(class_id, weekday),
@@ -192,11 +196,13 @@ def main():
         create_table(conn, create_classroom_table, 'classroom');
         create_table(conn, create_weekday_table, 'weekday');
 
-        webcrawler(conn);
+        if(len(selectData(conn, 'SELECT DISTINCT classroom from classroom')) == 0):
+            webcrawler(conn);
 
         emptyClassroom = findEmptyClassroom(conn, current_weekday, current_hour)
 
         print(emptyClassroom)
+        #emptyClassroom[i][0]
         conn.commit()
 
         conn.close()
