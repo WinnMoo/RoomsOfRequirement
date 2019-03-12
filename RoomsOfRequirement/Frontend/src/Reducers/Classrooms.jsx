@@ -1,4 +1,4 @@
-import GET_CLASSROOMS from '../Actions/Types';
+import { GET_CLASSROOMS, FILTER_CLASSROOMS } from '../Actions/Types';
 
 const initialState = {
   classrooms: [
@@ -21,7 +21,17 @@ const initialState = {
       end_time: '17:45',
     },
   ],
+  searchText: '',
+  filteredClassrooms: [],
 };
+
+export function filterClassrooms(state, searchedText) {
+  let temp = state.classrooms;
+  if (searchedText !== '') {
+    temp = temp.filter(room => room.classroom.includes(searchedText));
+  }
+  return temp;
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -29,6 +39,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         classrooms: action.payload,
+        filteredClassrooms: action.payload,
+      };
+    case FILTER_CLASSROOMS:
+      return {
+        ...state,
+        searchText: action.payload,
+        filteredClassrooms: filterClassrooms(state, action.payload),
       };
     default:
       return state;

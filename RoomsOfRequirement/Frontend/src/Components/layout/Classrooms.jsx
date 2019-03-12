@@ -26,7 +26,7 @@ class Classrooms extends Component {
     );
   }
 }
-
+// export 'default' (imported as 'connect') was not found in 'react-redux
 const mapStateToProps = state => ({
   classrooms: state.classroomReducer.classrooms,
 });

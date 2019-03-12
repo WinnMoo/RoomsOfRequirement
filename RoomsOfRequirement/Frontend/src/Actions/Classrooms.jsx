@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import GET_CLASSROOMS from './Types';
+import { GET_CLASSROOMS } from './Types';
 
 // Get the classrooms from the seperately running server on Django
 const getClassrooms = () => (dispatch) => {

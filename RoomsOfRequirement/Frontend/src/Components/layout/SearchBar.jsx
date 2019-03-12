@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import filterClassrooms from '../../Actions/Filter';
+
+//  ///    ////      /////        ////////////        /////      ////    ///  //
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class SearchBar extends Component {
-  state = {
-    building: '',
-  }
+class SearchBar extends Component {
+  static propTypes = {
+    filterClassrooms: PropTypes.func.isRequired,
+  };
 
   onChange = (event) => {
     // Maybe move updateClassrooms() here?
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.filterClassrooms(event.target.value);
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
   onSubmit = (event) => {
-    const { updateClassrooms } = this.props;
-    const { building } = this.state;
+    const { searchText } = this.state;
     event.preventDefault(); // Prevents the page from reloading
-    updateClassrooms(building);
+    filterClassrooms(searchText); // Calls the function in App.jsx
     this.setState({
-      building: '',
+      searchText: '',
     });
   }
 
@@ -29,7 +34,7 @@ export default class SearchBar extends Component {
       <form onSubmit={this.onSubmit}>
         <input
           type="text"
-          name="building"
+          name="searchText"
           placeholder="Building Name.."
           autoComplete="off"
           onChange={this.onChange}
@@ -39,6 +44,11 @@ export default class SearchBar extends Component {
   }
 }
 
-SearchBar.propTypes = {
-  updateClassrooms: PropTypes.func.isRequired,
-};
+const mapStateToProps = state => ({
+  searchText: state.classroomReducer.searchText,
+});
+
+export default connect(
+  mapStateToProps,
+  { filterClassrooms },
+)(SearchBar);
