@@ -6,7 +6,7 @@ import getClassrooms from '../../Actions/Classrooms';
 
 class Classrooms extends Component {
   static propTypes = {
-    classrooms: PropTypes.arrayOf(PropTypes.object).isRequired,
+    filteredClassrooms: PropTypes.arrayOf(PropTypes.object).isRequired,
     getClassrooms: PropTypes.func.isRequired,
   };
 
@@ -16,10 +16,10 @@ class Classrooms extends Component {
   }
 
   render() {
-    const { classrooms } = this.props;
+    const { filteredClassrooms } = this.props;
     return (
       <Fragment>
-        {classrooms.map(room => (
+        {filteredClassrooms.map(room => (
           <Classroom key={room.class_id} room={room} />
         ))}
       </Fragment>
@@ -28,7 +28,7 @@ class Classrooms extends Component {
 }
 // export 'default' (imported as 'connect') was not found in 'react-redux
 const mapStateToProps = state => ({
-  classrooms: state.classroomReducer.classrooms,
+  filteredClassrooms: state.classroomReducer.filteredClassrooms,
 });
 
 export default connect(

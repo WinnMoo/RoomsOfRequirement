@@ -1,9 +1,8 @@
 import axios from 'axios';
-
 import { GET_CLASSROOMS } from './Types';
 
-// Get the classrooms from the seperately running server on Django
-const getClassrooms = () => (dispatch) => {
+// Use the REST API from Django to get the list of classrooms in the database
+export default () => (dispatch) => {
   axios
     .get('/api/Classrooms/')
     .then((res) => {
@@ -14,5 +13,3 @@ const getClassrooms = () => (dispatch) => {
     })
     .catch(err => console.log(err));
 };
-
-export default getClassrooms;

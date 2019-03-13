@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Classrooms from './layout/Classrooms';
 import SearchBar from './layout/SearchBar';
@@ -7,14 +6,6 @@ import store from '../store';
 import './App.css';
 
 export default class App extends Component {
-  /* updateClassrooms = (building) => {
-    let temp = classroomList;
-    if (building !== '') {
-      temp = classroomList.filter(classroom => classroom.classroom.includes(building));
-    }
-    this.setState({ classrooms: temp });
-  }; */
-
   render() {
     return (
       <Provider store={store}>
@@ -33,5 +24,3 @@ export default class App extends Component {
     );
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('app'));

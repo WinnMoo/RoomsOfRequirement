@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import filterClassrooms from '../../Actions/Filter';
 
-//  ///    ////      /////        ////////////        /////      ////    ///  //
-
-// eslint-disable-next-line react/prefer-stateless-function
 class SearchBar extends Component {
   static propTypes = {
     filterClassrooms: PropTypes.func.isRequired,
   };
 
+  // Upon changing the text in the searchBar, update the list.
+  // The second line makes sure anything that's typed stays.
   onChange = (event) => {
-    // Maybe move updateClassrooms() here?
     // eslint-disable-next-line react/destructuring-assignment
     this.props.filterClassrooms(event.target.value);
     this.setState({
@@ -20,13 +18,9 @@ class SearchBar extends Component {
     });
   }
 
+  // Prevent page from reloading
   onSubmit = (event) => {
-    const { searchText } = this.state;
-    event.preventDefault(); // Prevents the page from reloading
-    filterClassrooms(searchText); // Calls the function in App.jsx
-    this.setState({
-      searchText: '',
-    });
+    event.preventDefault();
   }
 
   render() {
