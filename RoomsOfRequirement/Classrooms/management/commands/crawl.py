@@ -143,9 +143,10 @@ def insert_classroom_data(cur, fields, class_id):
 
     insert_weekday_table = (
         'INSERT INTO WEEKDAY ('
+        'weekday_id,'
         'class_id,'
         'weekday)'
-        'VALUES (?,?)'
+        'VALUES (?,?,?)'
     )
 
     cur.execute(insert_classroom_table,
@@ -154,8 +155,10 @@ def insert_classroom_data(cur, fields, class_id):
     # split weekdays based on capitalization
     # ie MW become [M,W]
     weekdays = re.findall('[A-Z][^A-Z]*', day)
+    i = class_id
     for weekday in weekdays:
-        cur.execute(insert_weekday_table, (class_id, weekday))
+        cur.execute(insert_weekday_table, (i, class_id, weekday))
+        i += 100
 
 
 def webcrawler(conn):
@@ -234,9 +237,9 @@ def main():
 
     create_weekday_table = (
         'CREATE TABLE IF NOT EXISTS WEEKDAY ('
+        'weekday_id integer,'
         'class_id integer,'
         'weekday text,'
-        'PRIMARY KEY(class_id, weekday),'
         'FOREIGN KEY (class_id)'
         'REFERENCES CLASSROOM (class_id)'
         ');'

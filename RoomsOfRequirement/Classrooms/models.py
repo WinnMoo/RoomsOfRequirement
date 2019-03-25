@@ -17,3 +17,13 @@ class Classroom(models.Model):
     class Meta:
         managed = False
         db_table = 'CLASSROOM'
+
+
+class Weekday(models.Model):
+    weekday_id = models.IntegerField(primary_key=True)
+    class_id = models.IntegerField()
+    weekday = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'WEEKDAY'
