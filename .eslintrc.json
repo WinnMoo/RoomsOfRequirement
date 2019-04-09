@@ -1,6 +1,10 @@
 {
-  "extends": ["airbnb"],
-  "plugins": ["react"],
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "react"
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
@@ -9,7 +13,8 @@
     }
   },
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "linebreak-style": "off"
   },
   "globals": {
     "document": true,

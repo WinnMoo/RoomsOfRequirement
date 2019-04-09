@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+
 import filterClassrooms from '../../Actions/Filter';
 
 class SearchBar extends Component {
@@ -26,11 +28,13 @@ class SearchBar extends Component {
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          type="text"
+        <TextField
+          id="outlined-building-input"
+          label="Building Name"
           name="searchText"
-          placeholder="Building Name.."
           autoComplete="off"
+          margin="normal"
+          variant="outlined"
           onChange={this.onChange}
         />
       </form>
