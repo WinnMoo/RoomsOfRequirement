@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
-import filterClassrooms from '../../Actions/Filter';
+import { filterClassrooms } from '../../Store/Actions/Classrooms';
 
 class SearchBar extends Component {
   static propTypes = {

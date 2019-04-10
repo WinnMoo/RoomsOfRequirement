@@ -18,13 +18,15 @@ export default class Classroom extends Component {
 
   render() {
     const { room } = this.props;
-    const { classroom, start_time, end_time } = room;
+    const { classroom, times } = room;
     return (
       <Card className="Classroom-box">
         <CardActionArea>
           <CardContent>
             <Typography component="h5" variant="h5">{classroom}</Typography>
-            <Typography variant="subtitle1" color="textSecondary">{`${start_time}-${end_time}`}</Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              {times.map(t => `${t.start_time}-${t.end_time}, `)}
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>

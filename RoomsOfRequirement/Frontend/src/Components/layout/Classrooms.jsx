@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Classroom from './Classroom';
-import getClassrooms from '../../Actions/Classrooms';
+import { getClassrooms } from '../../Store/Actions/Classrooms';
 
 class Classrooms extends Component {
   static propTypes = {
