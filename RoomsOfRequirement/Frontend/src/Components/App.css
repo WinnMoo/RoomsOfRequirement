@@ -65,27 +65,11 @@
     }
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-}
-
-.App-header {
-    background-color: #ffffff;
-    height: 100%;
-    padding: 20px;
-    color: #484236;
-}
-
 .App-title {
     font-size: 5em;
     font-weight: 100;
     font-family: Roboto;
     color: #484236;
-}
-
-.App-intro {
-    font-size: xx-large;
 }
 
 .Classrooms-list {

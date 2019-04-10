@@ -1,22 +1,22 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Classrooms from './layout/Classrooms';
-import SearchBar from './layout/SearchBar';
+import Dashboard from './layout/Dashboard';
 import store from '../store';
-import './App.css';
+import ClassDetails from './layout/ClassDetails';
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <h1 className="App-title">Room of Requirement</h1>
-          <SearchBar updateClassrooms={this.updateClassrooms} />
-          <div className="Classrooms-list">
-            <Classrooms />
-          </div>
-        </div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/:id" component={ClassDetails} />
+          </Switch>
+        </BrowserRouter>
       </Provider>
     );
   }

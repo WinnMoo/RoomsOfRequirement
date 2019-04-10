@@ -65,7 +65,7 @@ const filterClassrooms = (list, searchedText) => {
   return temp;
 };
 
-export default (state = initialState, action) => {
+export default function classroomReducer(state = initialState, action) {
   switch (action.type) {
     case 'GET_CLASSROOMS': {
       const groundTruth = action.payload;
@@ -86,4 +86,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
