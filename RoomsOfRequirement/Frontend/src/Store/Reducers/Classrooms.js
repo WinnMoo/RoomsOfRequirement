@@ -60,7 +60,7 @@ const getClassroomList = (list) => {
 const filterClassrooms = (list, searchedText) => {
   let temp = list;
   if (searchedText !== '') {
-    temp = temp.filter(room => room.classroom.includes(searchedText));
+    temp = temp.filter(room => room.classroom.includes(searchedText.toUpperCase()));
   }
   return temp;
 };
