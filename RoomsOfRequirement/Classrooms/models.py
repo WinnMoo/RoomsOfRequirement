@@ -11,19 +11,10 @@ class Classroom(models.Model):
 
     class_id = models.IntegerField(primary_key=True)
     classroom = models.TextField()
+    weekday = models.TextField()
     start_time = models.TextField()
     end_time = models.TextField()
 
     class Meta:
         managed = False
         db_table = 'CLASSROOM'
-
-
-class Weekday(models.Model):
-    weekday_id = models.IntegerField(primary_key=True)
-    class_id = models.IntegerField()
-    weekday = models.TextField()
-
-    class Meta:
-        managed = False
-        db_table = 'WEEKDAY'

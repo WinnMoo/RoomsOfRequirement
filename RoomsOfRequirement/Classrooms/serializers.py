@@ -4,7 +4,7 @@ Created on Tue Mar 7 12:26:53 2019
 @author: chris
 """
 from rest_framework import serializers
-from .models import Classroom, Weekday
+from .models import Classroom
 
 
 class ClassroomSerializer(serializers.ModelSerializer):
@@ -12,12 +12,4 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Classroom
-        fields = '__all__'
-
-
-class WeekdaySerializer(serializers.ModelSerializer):
-    """Handles serialization of Weekday model"""
-
-    class Meta:
-        model = Weekday
         fields = '__all__'
