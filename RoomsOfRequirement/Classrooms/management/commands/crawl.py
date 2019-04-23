@@ -114,15 +114,15 @@ def parse_and_insert_classroom_data(conn, url, id_constant):
             pass
         else:
             insert_classroom_data(cur, fields, class_id)
-            class_id = class_id + 1
+            class_id = class_id + 10
         i += 11
 
 
 def insert_classroom_data(cur, fields, class_id):
     """ Inserts the classroom field into the database
     :param cur: Connection cursor
-    :param url: The tuple of class data taken from the HMTL
-    :param id_constant: Multiplied constant that gives each class a unique id
+    :param fields: The tuple of class data taken from the HMTL
+    :param class_id: Multiplied constant that gives each class a unique id
     :return:
     """
     # initialize required data for insert
@@ -136,29 +136,19 @@ def insert_classroom_data(cur, fields, class_id):
         'INSERT INTO CLASSROOM ('
         'class_id,'
         'classroom,'
+        'weekday,'
         'start_time,'
         'end_time)'
-        'VALUES (?,?,?,?)'
+        'VALUES (?,?,?,?,?)'
     )
-
-    insert_weekday_table = (
-        'INSERT INTO WEEKDAY ('
-        'weekday_id,'
-        'class_id,'
-        'weekday)'
-        'VALUES (?,?,?)'
-    )
-
-    cur.execute(insert_classroom_table,
-                (class_id, classroom, start_time, end_time))
 
     # split weekdays based on capitalization
     # ie MW become [M,W]
     weekdays = re.findall('[A-Z][^A-Z]*', day)
-    i = class_id
     for weekday in weekdays:
-        cur.execute(insert_weekday_table, (i, class_id, weekday))
-        i += 100
+        cur.execute(insert_classroom_table,
+                    (class_id, classroom, weekday, start_time, end_time))
+        class_id += 1
 
 
 def webcrawler(conn):
@@ -230,18 +220,9 @@ def main():
         'CREATE TABLE IF NOT EXISTS CLASSROOM ('
         'class_id integer PRIMARY KEY,'
         'classroom text,'
+        'weekday text,'
         'start_time text,'
         'end_time text'
-        ');'
-    )
-
-    create_weekday_table = (
-        'CREATE TABLE IF NOT EXISTS WEEKDAY ('
-        'weekday_id integer,'
-        'class_id integer,'
-        'weekday text,'
-        'FOREIGN KEY (class_id)'
-        'REFERENCES CLASSROOM (class_id)'
         ');'
     )
     # create a database connection
@@ -259,7 +240,6 @@ def main():
     if conn is not None:
         # create table
         create_table(conn, create_classroom_table)  # classroom
-        create_table(conn, create_weekday_table)  # weekday
 
         if not select_data(conn, 'SELECT DISTINCT classroom from classroom'):
             begin = datetime.now()
@@ -269,14 +249,18 @@ def main():
         else:
             print('Database already filled')
 
-        empty_classroom = find_empty_classroom(
-            conn, current_weekday, current_hour)
+        # empty_classroom = find_empty_classroom(
+        #    conn, current_weekday, current_hour)
 
-        for room in empty_classroom:
-            print(room[0], end='  ')
+        # for room in empty_classroom:
+        #    print(room[0], end='  ')
 
         conn.commit()
 
         conn.close()
     else:
         print('Error! cannot create the database connection.')
+
+
+if __name__ == '__main__':
+    main()

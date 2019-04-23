@@ -23,6 +23,23 @@ export default class Classroom extends Component {
     }).isRequired,
   };
 
+  days = (times) => {
+    const display = [];
+    for (let i = 0; i < times.length; i += 1) {
+      const p = times[i].weekday;
+      let idx = display.findIndex(room => room.day === p);
+      if (idx === -1) {
+        display.push({
+          day: p,
+          time: [],
+        });
+        idx = display.length - 1;
+      }
+      display[idx].time.push(`${times[i].start_time}-${times[i].end_time}`);
+    }
+    return display;
+  }
+
   render() {
     const { room } = this.props;
     const { classroom, times } = room;
@@ -33,7 +50,7 @@ export default class Classroom extends Component {
             <CardContent>
               <Typography component="h5" variant="h5" style={{ color: '#484236' }}>{classroom}</Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {times.map(t => `${t.start_time}-${t.end_time}`).join(', ')}
+                {this.days(times).map(day => <div>{day.day}: {day.time.join(', ')}</div>)}
               </Typography>
             </CardContent>
           </CardActionArea>

@@ -17,6 +17,29 @@ const initialState = {
   filteredClassrooms: [],
 };
 
+const indexWeekday = (weekday) => {
+  switch (weekday) {
+    case 'Sa':
+      return 0;
+    case 'M':
+      return 1;
+    case 'Tu':
+      return 2;
+    case 'W':
+      return 3;
+    case 'Th':
+      return 4;
+    case 'F':
+      return 5;
+    default:
+      return 6;
+  }
+};
+
+const uniqueTimes = (value, index, self) => {
+  return self.indexOf(value) === index;
+};
+
 /**
  * For every classroom in list, check if classroom already exists.
  *
@@ -33,12 +56,14 @@ const getClassroomList = (list) => {
         class_id: list[i].class_id,
         classroom: list[i].classroom,
         times: [{
+          weekday: list[i].weekday,
           start_time: list[i].start_time,
           end_time: list[i].end_time,
         }],
       });
     } else {
       temp[idx].times.push({
+        weekday: list[i].weekday,
         start_time: list[i].start_time,
         end_time: list[i].end_time,
       });
@@ -47,6 +72,7 @@ const getClassroomList = (list) => {
   temp.sort((roomA, roomB) => roomA.classroom > roomB.classroom);
   temp.forEach((room) => {
     room.times.sort(((tA, tB) => tA.start_time > tB.start_time));
+    room.times.sort(((tA, tB) => indexWeekday(tA.weekday) > indexWeekday(tB.weekday)));
   });
   return temp;
 };
@@ -68,7 +94,7 @@ const filterClassrooms = (list, searchedText) => {
 export default function classroomReducer(state = initialState, action) {
   switch (action.type) {
     case 'GET_CLASSROOMS': {
-      const groundTruth = action.payload;
+      const groundTruth = action.payload.sort((roomA, roomB) => roomA.classroom > roomB.classroom);
       const list = getClassroomList(groundTruth);
       return {
         ...state,
