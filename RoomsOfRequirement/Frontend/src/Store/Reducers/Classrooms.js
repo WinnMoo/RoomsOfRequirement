@@ -15,6 +15,7 @@ const initialState = {
   searchText: '',
   classroomList: [],
   filteredClassrooms: [],
+  currentClass: {},
 };
 
 const indexWeekday = (weekday) => {
@@ -34,10 +35,6 @@ const indexWeekday = (weekday) => {
     default:
       return 6;
   }
-};
-
-const uniqueTimes = (value, index, self) => {
-  return self.indexOf(value) === index;
 };
 
 /**
@@ -108,6 +105,11 @@ export default function classroomReducer(state = initialState, action) {
         ...state,
         searchText: action.payload,
         filteredClassrooms: filterClassrooms(state.classroomList, action.payload),
+      };
+    case 'SELECT_CLASSROOM':
+      return {
+        ...state,
+        currentClass: action.payload,
       };
     default:
       return state;

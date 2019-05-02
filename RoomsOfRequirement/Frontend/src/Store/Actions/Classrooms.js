@@ -22,3 +22,10 @@ export function filterClassrooms(searchText) {
     payload: searchText,
   };
 }
+
+export function selectClass(classroom) {
+  return {
+    type: 'SELECT_CLASSROOM',
+    payload: classroom,
+  };
+}
